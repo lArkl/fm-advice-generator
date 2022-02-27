@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+	@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+  	:root {
+  		--light-cyan: hsl(193, 38%, 86%);
+		--neon-green: hsl(150, 100%, 66%);
+		--gray-blue: hsl(217, 19%, 38%);
+		--dark-gray-blue: hsl(217, 19%, 24%);
+  	}
+
+  	body {
+  		font-family: 'Manrope', sans-serif;
+  		font-weight: bold;
+  		background: var(--dark-gray-blue);
+  		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		height: 85vh;
+  		font-size: 11px;
+  	}
+
+  	.advice {
+  		background: var(--gray-blue);
+  		border-radius: 1rem;
+  		padding: 2.5rem 3.5rem;
+  		padding-bottom: 4.5rem;
+  		position: relative;
+  		text-align: center;
+  		margin: 0.8rem;
+  	}
+
+  	.advice-header {
+  		color: var(--neon-green);
+  		font-size: 0.8em;
+  		letter-spacing: 0.3em;
+  	}
+
+  	.advice-quote {
+  		color: var(--light-cyan);
+  		font-size: 1.8em;
+  		margin: 2rem 0;
+  	}
+
+  	.advice-quote:before {
+	  content: open-quote;
+	}
+  	.advice-quote:after {
+	  content: close-quote;
+	}
+
+	.advice-divider {
+		display: flex;
+		background-image: url(./images/pattern-divider-mobile.svg);
+		background-size: 100%;
+		background-repeat: no-repeat;
+		justify-content: space-between;
+	}
+
+	.advice-divider > hr {
+		width: 40%;
+		margin-inline-start: 0;
+		margin-inline-end: 0;
+	}
+
+	.advice-button {
+		background: var(--neon-green);
+		border: none;
+		border-radius: 2rem;
+		/*margin: 0 calc(50% - 5.5rem);*/
+		width: 4rem;
+		height: 4rem;
+		position: absolute;
+		bottom: -2rem;
+		left: calc(50% - 2rem);
+	}
+
+	.advice-button:active {
+		box-shadow: 0 0 2rem var(--neon-green);
+	}
+
+	@media (min-width: 450px) {
+		body {
+			font-size: 16px;
+	  		height: 98vh;
+		}
+
+	  	.advice {
+	  		width: 27.7rem;
+	  	}
+
+  		.advice-divider {
+			display: flex;
+			background-image: url(./images/pattern-divider-desktop.svg);
+			justify-content: space-between;
+		}
+	}
+
+  </style>
+</head>
+<body>
+	<main class="advice">
+		<h1 class="advice-header">ADVICE #117</h1>
+		<blockquote class="advice-quote">
+			It is easy to sit up and take notice, what's difficult is getting up and taking action.
+		</blockquote>
+		<div class="advice-divider">
+			<hr>
+			<hr>
+		</div>
+		<button class="advice-button">
+			<img src="./images/icon-dice.svg" alt="new advice button">
+		</button>
+	</main>
+	<script type="text/javascript">
+		const adviceHeaderRef = document.querySelector(".advice-header");
+		const adviceQuoteRef = document.querySelector(".advice-quote");
+		const adviceButtonRef = document.querySelector(".advice-button");
+
+		function updateAdvice(slip) {
+			const { id, advice } = slip;
+			adviceHeaderRef.textContent = `ADVICE #${id}`;
+			adviceQuoteRef.textContent = advice;
+		}
+
+		const URI = "https://api.adviceslip.com/advice"
+		adviceButtonRef.onclick = function fetchAdvice() {
+			adviceButtonRef.classList.toggle('fetch')
+
+			fetch(URI)
+			.then((res) => res.json())
+			.then(({slip}) => {
+				updateAdvice(slip);
+			}).catch((err) => console.log(err))
+			.finally(() => adviceButtonRef.classList.toggle('fetch'));			
+		}
+
+		// const tempSlip = {
+		// 	id: 117,
+		// 	advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action."
+		// };
+		// updateAdvice(tempSlip);
+	</script>  
+</body>
+</html>
