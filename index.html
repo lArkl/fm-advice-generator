@@ -12,10 +12,10 @@
   <style>
 	@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
   	:root {
-  		--light-cyan: hsl(193, 38%, 86%);
-		--neon-green: hsl(150, 100%, 66%);
-		--gray-blue: hsl(217, 19%, 38%);
-		--dark-gray-blue: hsl(217, 19%, 24%);
+  		--light-cyan: hsl(193, 38%, 76%);
+		--neon-green: hsl(150, 100%, 56%);
+		--gray-blue: hsl(217, 19%, 28%);
+		--dark-gray-blue: hsl(217, 19%, 14%);
   	}
 
   	body {
@@ -64,19 +64,13 @@
 		background-size: 100%;
 		background-repeat: no-repeat;
 		justify-content: space-between;
-	}
-
-	.advice-divider > hr {
-		width: 40%;
-		margin-inline-start: 0;
-		margin-inline-end: 0;
+		height: 1rem;
 	}
 
 	.advice-button {
 		background: var(--neon-green);
 		border: none;
 		border-radius: 2rem;
-		/*margin: 0 calc(50% - 5.5rem);*/
 		width: 4rem;
 		height: 4rem;
 		position: absolute;
@@ -90,8 +84,7 @@
 
 	@media (min-width: 450px) {
 		body {
-			font-size: 16px;
-	  		height: 98vh;
+			font-size: 15px;
 		}
 
 	  	.advice {
@@ -113,15 +106,12 @@
 		<blockquote class="advice-quote">
 			It is easy to sit up and take notice, what's difficult is getting up and taking action.
 		</blockquote>
-		<div class="advice-divider">
-			<hr>
-			<hr>
-		</div>
+		<div class="advice-divider"></div>
 		<button class="advice-button">
 			<img src="./images/icon-dice.svg" alt="new advice button">
 		</button>
 	</main>
-	<script type="text/javascript">
+	<script>
 		const adviceHeaderRef = document.querySelector(".advice-header");
 		const adviceQuoteRef = document.querySelector(".advice-quote");
 		const adviceButtonRef = document.querySelector(".advice-button");
@@ -143,12 +133,6 @@
 			}).catch((err) => console.log(err))
 			.finally(() => adviceButtonRef.classList.toggle('fetch'));			
 		}
-
-		// const tempSlip = {
-		// 	id: 117,
-		// 	advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action."
-		// };
-		// updateAdvice(tempSlip);
 	</script>  
 </body>
 </html>
