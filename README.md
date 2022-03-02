@@ -46,7 +46,8 @@ Users should be able to:
 
 ### What I learned
 
-Some CSS properties like line-spacing for text and blockquote tag importance for semantic. 
+* Some CSS properties like line-spacing for text and blockquote tag importance for semantic.
+* Animations using opacity for better performance.
 
 ### Continued development
 

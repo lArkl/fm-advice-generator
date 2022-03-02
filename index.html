@@ -37,7 +37,7 @@
   		padding-bottom: 3.7rem;
   		position: relative;
   		text-align: center;
-  		max-width: 21rem;
+  		width: 21rem;
   	}
 
   	.advice-header {
@@ -56,6 +56,11 @@
 	}
   	.advice-quote:after {
 	  content: close-quote;
+	}
+
+	.error-message {
+  		color: #f08080;
+  		font-size: 1.8em;
 	}
 
 	.advice-button {
@@ -107,7 +112,7 @@
 
 	  	.advice {
 	  		padding: 3.7rem 0;
-	  		max-width: 34rem;
+	  		width: 34rem;
 	  	}
 
 	}
@@ -148,8 +153,13 @@
 				fetch(URI)
 				.then((res) => res.json())
 				.then(({slip}) => {
+					adviceQuoteRef.classList.replace('error-message', 'advice-quote')
 					updateAdvice(slip);
-				}).catch((err) => console.log(err))
+				}).catch(() => {
+					adviceQuoteRef.classList.replace('advice-quote', 'error-message')
+					adviceHeaderRef.textContent = "ADVICE ERROR";
+					adviceQuoteRef.textContent = "Our advicer went to look for advice. Try again in a moment.";
+				})
 				.finally(() => adviceIconBtnRef.classList.toggle('dicing'))
 			}
 			adviceIconBtnRef.classList.toggle('dicing');
