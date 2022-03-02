@@ -23,7 +23,7 @@
   		background: var(--dark-gray-blue);
   		display: flex;
   		font-family: 'Manrope', sans-serif;
-  		font-size: 13px;
+  		font-size: 12px;
   		font-weight: bold;
   		height: 90vh;
   		justify-content: center;
@@ -37,6 +37,7 @@
   		padding-bottom: 3.7rem;
   		position: relative;
   		text-align: center;
+  		max-width: 21rem;
   	}
 
   	.advice-header {
@@ -68,8 +69,35 @@
 		left: calc(50% - 2rem);
 	}
 
-	.advice-button:active {
+	.dicing {
+		animation: dicing 1s infinite;
+	}
+
+	.advice-button::before {
 		box-shadow: 0 0 2rem var(--neon-green);
+		content: "";
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+		border-radius: 50%;
+		opacity: 0;
+	}
+
+	.advice-button:hover::before {
+		opacity: 0.7;
+		transition: opacity ease-out 100ms;
+	}
+
+	.advice-button:active::before {
+		opacity: 1;
+	}
+
+	@keyframes dicing {
+		30% { transform: translateY(70%); }
+		50% { transform: translateY(-40%) rotate(-70deg); }
+		100% { transform: rotate(-180deg); }
 	}
 
 	@media (min-width: 600px) {
@@ -79,7 +107,7 @@
 
 	  	.advice {
 	  		padding: 3.7rem 0;
-	  		width: 34rem;
+	  		max-width: 34rem;
 	  	}
 
 	}
@@ -95,8 +123,7 @@
 		<div class="advice-divider">
 			<img srcset="./images/pattern-divider-mobile.svg 295w,
 			             ./images/pattern-divider-desktop.svg 444w"
-			     sizes="(max-width: 600px) 300px,
-			            440px"
+			     sizes="(max-width: 600px) 295px, 444px"
 			     alt="divider between advice and dice">
 		</div>
 		<button class="advice-button">
@@ -107,6 +134,7 @@
 		const adviceHeaderRef = document.querySelector(".advice-header");
 		const adviceQuoteRef = document.querySelector(".advice-quote");
 		const adviceButtonRef = document.querySelector(".advice-button");
+		const adviceIconBtnRef = document.querySelector(".advice-button > img");
 
 		function updateAdvice(slip) {
 			const { id, advice } = slip;
@@ -115,13 +143,18 @@
 		}
 
 		const URI = "https://api.adviceslip.com/advice"
-		adviceButtonRef.onclick = function fetchAdvice() {
-			fetch(URI)
-			.then((res) => res.json())
-			.then(({slip}) => {
-				updateAdvice(slip);
-			}).catch((err) => console.log(err))
-		}
+		adviceButtonRef.addEventListener('click', () => {
+			const fetchAdvice = () => {
+				fetch(URI)
+				.then((res) => res.json())
+				.then(({slip}) => {
+					updateAdvice(slip);
+				}).catch((err) => console.log(err))
+				.finally(() => adviceIconBtnRef.classList.toggle('dicing'))
+			}
+			adviceIconBtnRef.classList.toggle('dicing');
+			setTimeout(fetchAdvice, 1000);
+		});
 	</script>  
 </body>
 </html>
