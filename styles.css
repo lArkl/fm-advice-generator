@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+
+:root {
+  --light-cyan: #d8e9f3;
+  --neon-green: #53ffab;
+  --gray-blue: #313a49;
+  --dark-gray-blue: #1f2531;
+}
+
+body {  
+  align-items: center;
+  background: var(--dark-gray-blue);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  height: 90vh;
+  justify-content: center;
+}
+
+.advice {
+  background: var(--gray-blue);
+  border-radius: 1rem;
+  margin: 0.5rem;
+  padding-top: 2.9rem;
+  padding-bottom: 3.7rem;
+  position: relative;
+  text-align: center;
+  width: 21rem;
+}
+
+.advice-header {
+  color: var(--neon-green);
+  font-size: 0.8em;
+  letter-spacing: 0.3em;
+}
+
+.advice-quote {
+  color: var(--light-cyan);
+  font-size: 1.8em;
+}
+
+.advice-quote:before {
+  content: open-quote;
+}
+.advice-quote:after {
+  content: close-quote;
+}
+
+.error-message {
+  color: #f08080;
+  font-size: 1.8em;
+}
+
+.advice-button {
+  background: var(--neon-green);
+  border: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  bottom: -2rem;
+  left: calc(50% - 2rem);
+}
+
+.dicing {
+  animation: dicing 1s infinite;
+}
+
+.advice-button::before {
+  box-shadow: 0 0 2rem var(--neon-green);
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.advice-button:hover::before {
+  opacity: 0.7;
+  transition: opacity ease-out 100ms;
+}
+
+.advice-button:active::before {
+  opacity: 1;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 3rem;
+  height: 2rem;
+  font-size: 11px;
+  color: var(--light-cyan);
+  text-align: center;
+  font-weight: bold;
+}
+.attribution > a { 
+  color: var(--neon-green);
+}
+
+@keyframes dicing {
+  30% { transform: translateY(70%); }
+  50% { transform: translateY(-40%) rotate(-70deg); }
+  100% { transform: rotate(-180deg); }
+}
+
+@media (min-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  .advice {
+    padding: 3.7rem 0;
+    width: 34rem;
+  }
+
+}
+
